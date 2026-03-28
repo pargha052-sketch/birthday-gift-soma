@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Story</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: black;
+  color: white;
+  text-align: center;
+}
+
+.scene {
+  position: absolute;
+  width: 100%;
+  top: 40%;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.active { opacity: 1; }
+
+h1 {
+  font-size: 2.8em;
+  text-shadow: 0 0 20px pink;
+}
+
+.typing {
+  border-right: 2px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 4s steps(40) forwards;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Slideshow */
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.show { opacity: 0.6; }
+
+/* Hearts */
+.heart {
+  position: absolute;
+  color: red;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh);}
+  100% {transform: translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Photos -->
+<img src="PHOTO1.jpg" class="bg show">
+<img src="PHOTO2.jpg" class="bg">
+<img src="PHOTO3.jpg" class="bg">
+
+<!-- Scenes -->
+<div id="scene1" class="scene active">
+  <h1>Happy Birthday HER_NAME 💖</h1>
+</div>
+
+<div id="scene2" class="scene">
+  <p class="typing">You came into my life like a dream ✨</p>
+</div>
+
+<div id="scene3" class="scene">
+  <p class="typing">Every moment with you is magical 💫</p>
+</div>
+
+<div id="scene4" class="scene">
+  <p class="typing">Your smile = my happiness 😊</p>
+</div>
+
+<div id="scene5" class="scene">
+  <h1>I Love You Forever ♾️</h1>
+</div>
+
+<script>
+const scenes = document.querySelectorAll(".scene");
+const images = document.querySelectorAll(".bg");
+
+let i = 0;
+
+function nextScene() {
+  scenes[i].classList.remove("active");
+  images[i % images.length].classList.remove("show");
+
+  i++;
+
+  scenes[i % scenes.length].classList.add("active");
+  images[i % images.length].classList.add("show");
+}
+
+setInterval(nextScene, 6000); // ~30 sec
+
+// hearts
+function heart() {
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (Math.random()*20+10)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+}
+setInterval(heart,300);
+</script>
+
+</body>
+</html>
